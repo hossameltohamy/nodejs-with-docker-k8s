@@ -9,7 +9,6 @@ pipeline {
         git url:'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git', branch:'master'
       }
     }
-    
       stage("Build image") {
             steps {
                 script {
