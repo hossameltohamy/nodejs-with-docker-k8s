@@ -1,6 +1,6 @@
 pipeline {
 
-  agent { label 'kubepod' }
+  agent any
 
   stages {
 
@@ -9,11 +9,31 @@ pipeline {
         git url:'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git', branch:'master'
       }
     }
+    
+      stage("Build image") {
+            steps {
+                script {
+                    myapp = docker.build("hossamyahia107/nodejs-api:${env.BUILD_ID}")
+                }
+            }
+        }
+    
+      stage("Push image") {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                            myapp.push("latest")
+                            myapp.push("${env.BUILD_ID}")
+                    }
+                }
+            }
+        }
 
+    
     stage('Deploy App') {
       steps {
         script {
-          kubernetesDeploy(configs: "k8s/server-deployment.yaml", kubeconfigId: "mykubeconfig2")
+          kubernetesDeploy(configs: "k8s/server-deployment.yml", kubeconfigId: "mykubeconfig")
         }
       }
     }
