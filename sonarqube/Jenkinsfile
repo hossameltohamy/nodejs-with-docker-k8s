@@ -1,0 +1,21 @@
+node {
+    
+    stage('prep') {
+        git url: 'https://github.com/hossameltohamy/export-to-google-sheet.git'
+    }
+ stage('install') {
+     nodejs(nodeJSInstallationName: 'nodejs') {
+       sh 'node -v'
+       sh 'npm install'
+     }
+   }
+ 
+    stage('sonar-scanner') {
+      def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+      withCredentials([string(credentialsId: 'sonar', variable: 'sonarLogin')]) {
+        sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectName=export-to-google -Dsonar.projectVersion=${env.BUILD_NUMBER}  -Dsonar.projectKey=GS -Dsonar.sources=. -Dsonar.projectBaseDir=/var/jenkins_home/workspace/sonar -Dsonar.sourceEncoding=UTF-8 -Dsonar.language=js"
+        
+      }
+    }
+       
+}
