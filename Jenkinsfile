@@ -30,7 +30,6 @@ agent any
         script {
           kubernetesDeploy(configs: "server-deployment.yaml", kubeconfigId: "mykubeconfig")
         }
-      
       }
     }
 
