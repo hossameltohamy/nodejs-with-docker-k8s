@@ -1,5 +1,5 @@
 pipeline {
-agent {label 'kube'}
+agent {label 'jenkins-slave'}
   stages {
 
     stage('Checkout Source') {
