@@ -38,7 +38,7 @@
 // }
 pipeline {
 
-  agent { label 'jnlp' }
+  agent { label 'jenkins-slave' }
   stages {
     stage('Checkout Source') {
       steps {
