@@ -36,24 +36,33 @@
 //   }
 
 // }
-pipeline {
+// pipeline {
 
-  agent { label 'jenkins-slave' }
-  stages {
-    stage('Checkout Source') {
-      steps {
-        git url:'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git', branch:'test-deploy-stage'
-      }
+//   agent { label 'jenkins-slave' }
+//   stages {
+//     stage('Checkout Source') {
+//       steps {
+//         git url:'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git', branch:'test-deploy-stage'
+//       }
+//     }
+
+//     stage('Deploy App') {
+//       steps {
+//         script {
+//           kubernetesDeploy(configs: "server-deployment.yaml", kubeconfigId: "mykubeconfig")
+//         }
+//       }
+//     }
+
+//   }
+
+// }
+node('jenkins-slave') {
+    
+     stage('unit-tests') {
+        sh(script: """
+            docker run --rm alpine /bin/sh -c "echo hello world"
+        """)
     }
-
-    stage('Deploy App') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "server-deployment.yaml", kubeconfigId: "mykubeconfig")
-        }
-      }
-    }
-
-  }
-
 }
+```
