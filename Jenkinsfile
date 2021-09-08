@@ -38,7 +38,7 @@
 // }
 pipeline {
 
-  agent { label 'kubepod' }
+  agent { label 'jenkins-slave' }
   stages {
     stage('Checkout Source') {
       steps {
