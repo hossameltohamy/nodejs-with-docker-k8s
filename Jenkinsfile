@@ -36,33 +36,33 @@
 //   }
 
 // }
-// pipeline {
+pipeline {
 
-//   agent { label 'jenkins-slave' }
-//   stages {
-//     stage('Checkout Source') {
-//       steps {
-//         git url:'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git', branch:'test-deploy-stage'
-//       }
-//     }
-
-//     stage('Deploy App') {
-//       steps {
-//         script {
-//           kubernetesDeploy(configs: "server-deployment.yaml", kubeconfigId: "mykubeconfig")
-//         }
-//       }
-//     }
-
-//   }
-
-// }
-node('jenkins-slave') {
-    
-     stage('unit-tests') {
-        sh(script: """
-            docker -v 
-        """)
+  agent { label 'jenkins-slave' }
+  stages {
+    stage('Checkout Source') {
+      steps {
+        git url:'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git', branch:'test-deploy-stage'
+      }
     }
+
+    stage('Deploy App') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "server-deployment.yaml", kubeconfigId: "mykubeconfig")
+        }
+      }
+    }
+
+  }
+
 }
+// node('jenkins-slave') {
+    
+//      stage('unit-tests') {
+//         sh(script: """
+//             docker -v 
+//         """)
+//     }
+// }
  
