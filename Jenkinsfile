@@ -40,16 +40,14 @@
 3
 // Jenkinsfile
 @Library('jenkins-shared-libraries') _
+import io.abc.DockerBuild
+
+
 // welcomeJob ‘lambdatest’
 pipeline {
     agent any
     stages {
-        stage ('Run only if approval exists') {
-
-            steps {
               DockerBuild('build docker, hossamyahia107/nodejs-api:latest')
-
-            }
         }
     }
 }
