@@ -37,7 +37,10 @@
 
 // }
 pipeline {
-  DockerBuild('build docker, hossamyahia107/nodejs-api:latest')
+  stages{
+      DockerBuild('build docker, hossamyahia107/nodejs-api:latest')
+
+  }
 
 
 
