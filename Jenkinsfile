@@ -40,8 +40,7 @@
 3
 // Jenkinsfile
 @Library('jenkins-shared-libraries') _
-
-
+   
 
 // welcomeJob ‘lambdatest’
 // pipeline {
@@ -83,8 +82,12 @@
 
  
 node {
+  stage{
+    test 'hello'
+  }
+ 
     
-         stage('build docker'){
+  stage('build docker'){
 	    sh "docker build -t hossamyahia107/nodejs-api:latest ."
   }
     stage('deploy to k8s'){
