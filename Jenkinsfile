@@ -44,18 +44,19 @@
 
 
 // welcomeJob ‘lambdatest’
-pipeline {
-    agent any
-    // stages {
-    //           DockerBuild('build docker, hossamyahia107/nodejs-api:latest')
-    //     }
-    stages{
-    stage('build docker'){
-	    sh "docker build -t hossamyahia107/nodejs-api:latest ."
-  }
-    }
+// pipeline {
+//     agent any
+//     // stages {
+//     //           DockerBuild('build docker, hossamyahia107/nodejs-api:latest')
+//     //     }
+//     stages{
+//     stage('build docker'){
+     
+// 	    sh "docker build -t hossamyahia107/nodejs-api:latest ."
+//   }
+//     }
       
-    }
+//     }
 
  
    
@@ -81,12 +82,10 @@ pipeline {
   // }
 
  
-// node('jenkins-slave') {
+node('jenkins-slave') {
     
-//      stage('unit-tests') {
-//         sh(script: """
-//             docker -v 
-//         """)
-//     }
-// }
+         stage('build docker'){
+	    sh "docker build -t hossamyahia107/nodejs-api:latest ."
+  }
+}
  
