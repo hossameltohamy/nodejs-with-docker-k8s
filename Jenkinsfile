@@ -87,6 +87,7 @@ node {
     stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
        sh 'npm install --only=dev'
+       sh 'npm install lodash --save'
        sh 'npm test'
      }
    }
