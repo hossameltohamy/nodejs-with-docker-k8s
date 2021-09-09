@@ -37,10 +37,9 @@
 
 // }
 
-3
+
 // Jenkinsfile
-@Library('jenkins-shared-libraries') _
-   
+
 
 // welcomeJob ‘lambdatest’
 // pipeline {
@@ -80,16 +79,16 @@
 
   // }
 
- 
+@Library('jenkins-shared-libraries') _
+def z = new  io.abc.pipeline()  
 node {
-  stage('test'){
-    test 'hello'
-  }
+
+    z.DockerBuild('build docker0, hossamyahia107/nodejs-api:latest')
  
     
-  stage('build docker'){
-	    sh "docker build -t hossamyahia107/nodejs-api:latest ."
-  }
+  // stage('build docker'){
+	//     sh "docker build -t hossamyahia107/nodejs-api:latest ."
+  // }
     stage('deploy to k8s'){
      withKubeConfig(caCertificate: '', clusterName: "do-ams3-test", contextName: '', credentialsId: "mykubeconfig", namespace: '', serverUrl: "https://8a604b66-43ff-4f24-926c-29b158894e10.k8s.ondigitalocean.com") {
         sh """ kubectl apply -f k8s/ """
