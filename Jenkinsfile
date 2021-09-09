@@ -48,8 +48,9 @@ pipeline {
     stage('Deploy App') {
       steps {
         script {
-          kubernetesDeploy(configs: "server-deployment.yaml", kubeconfigId: "mykubeconfigid")
-        }
+          // kubernetesDeploy(configs: "server-deployment.yaml", kubeconfigId: "mykubeconfigid")
+         KubernetesDeployment('Deploy App2, do-ams3-test, https://8a604b66-43ff-4f24-926c-29b158894e10.k8s.ondigitalocean.com , 8a604b66-43ff-4f24-926c-29b158894e10, kubectl applay -f k8s/')      
+           }
       }
     }
 
