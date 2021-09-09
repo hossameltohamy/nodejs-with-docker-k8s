@@ -89,7 +89,7 @@ node {
   }
     stage('deploy to k8s'){
      withKubeConfig(caCertificate: '', clusterName: "do-ams3-test", contextName: '', credentialsId: "mykubeconfig", namespace: '', serverUrl: "https://8a604b66-43ff-4f24-926c-29b158894e10.k8s.ondigitalocean.com") {
-        sh """ kubectl applay -f k8s/ """
+        sh """ kubectl apply -f k8s/ """
       }
   }
 }
