@@ -40,7 +40,7 @@
 3
 // Jenkinsfile
 @Library('jenkins-shared-libraries') _
-import io.abc
+
 
 
 // welcomeJob ‘lambdatest’
