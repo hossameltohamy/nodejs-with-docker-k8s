@@ -80,7 +80,7 @@
   // }
 
 @Library('jenkins-shared-libraries')_
-def z = new io.abc.pipeline
+def z = new io.abc.pipeline()
 node {
 
      z.DockerBuild('build docker0, hossamyahia107/nodejs-api:latest')
