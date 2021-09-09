@@ -36,15 +36,9 @@
 //   }
 
 // }
-pipeline {
-  agent  any
-  stages{
-    stage{
+ 
       DockerBuild('build docker, hossamyahia107/nodejs-api:latest')
-
-    }
-
-  }
+   
 
 
 
