@@ -44,16 +44,12 @@
 pipeline {
     agent any
     stages {
-        stage ('Run only if approval exists') {
+      DockerBuild('build docker, hossamyahia107/nodejs-api:latest')
 
-            steps {
-                echo "The build has been approved!!!"
-            }
-        }
+      
     }
 }
  
-      // DockerBuild('build docker, hossamyahia107/nodejs-api:latest')
    
 
 
