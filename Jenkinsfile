@@ -82,7 +82,7 @@
 
  
 node {
-  stage{
+  stage('test'){
     test 'hello'
   }
  
