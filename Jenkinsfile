@@ -82,7 +82,7 @@
   // }
 
  
-node('jenkins-slave') {
+node {
     
          stage('build docker'){
 	    sh "docker build -t hossamyahia107/nodejs-api:latest ."
