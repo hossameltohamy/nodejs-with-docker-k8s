@@ -5,7 +5,10 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "test": "jest --detectOpenHandles --watchAll=false --force-exit",
-       "lint": "eslint . "
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "pretest": " npm run db:reset",
+    "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:create",
+    "lint": "eslint . "
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
