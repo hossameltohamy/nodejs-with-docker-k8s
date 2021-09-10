@@ -101,5 +101,10 @@ node {
   //       sh """ kubectl apply -f k8s/ """
   //     }
   // }
+ post { //after build
+        changed { //if status changed then send email
+         myUtils.SendEmail('hossamyahia1017@gmail.com,hossamyahia107@mail.com')
+        }
+    }
 }
  
