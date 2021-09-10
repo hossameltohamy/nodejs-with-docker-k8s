@@ -84,7 +84,7 @@ def myUtils = new io.abc.pipeline()
 node {
     myUtils.Initialize_Workspace('Clean Work Space')
     myUtils.CheckOutScm('fetch repositry','https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
-    myUtils.CleanDocker('Clean Docker')
+    myUtils.CleanDocker('Clean Docker before start')
     stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
        sh 'docker run --name some-postgres -e POSTGRES_PASSWORD=hossam@107@test -d -p 5432:5432 postgres'
@@ -94,9 +94,10 @@ node {
      }
    }
     myUtils.DockerBuild('build DockerImage', 'hossamyahia107/nodejs-api:latest')
- 
+    myUtils.CleanDocker('Clean Docker after build & push')
     myUtils.KubernetesDeployment('deploytoK8sCluster','do-ams3-test','https://8a604b66-43ff-4f24-926c-29b158894e10.k8s.ondigitalocean.com','mykubeconfig' , 'kubectl apply -f k8s//')
     stage('Email Notification'){
+    myUtils.SendEmail('hossamyahia1017@gmail.com,hossamyahia107@mail.com')
     mail bcc: '', body: '''Build successful!!!!
     Thanks,
     Mahesh''', cc: '', from: '', replyTo: '', subject: 'Build successfull', to: 'smahesh2305@gmail.com'
