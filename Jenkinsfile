@@ -84,7 +84,6 @@ def myUtils = new io.abc.pipeline()
 node {
     myUtils.Initialize_Workspace('Clean Work Space')
     myUtils.CheckOutScm('fetch repositry','https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
-    myUtils.CleanDocker('Clean Docker before start')
     stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
        sh 'docker run --name some-postgres -e POSTGRES_PASSWORD=hossam@107@test -d -p 5432:5432 postgres'
@@ -106,9 +105,9 @@ node {
         // changed { 
         //  myUtils.SendEmail('hossamyahia1017@gmail.com,hossamyahia107@mail.com')
         // }
+
          always {
             echo 'I will always say Hello again!'
-            
             emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
                 recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
                 subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
