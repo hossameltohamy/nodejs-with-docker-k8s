@@ -96,7 +96,11 @@ node {
     myUtils.DockerBuild('build DockerImage', 'hossamyahia107/nodejs-api:latest')
  
     myUtils.KubernetesDeployment('deploytoK8sCluster','do-ams3-test','https://8a604b66-43ff-4f24-926c-29b158894e10.k8s.ondigitalocean.com','mykubeconfig' , 'kubectl apply -f k8s//')
-
+    stage('Email Notification'){
+    mail bcc: '', body: '''Build successful!!!!
+    Thanks,
+    Mahesh''', cc: '', from: '', replyTo: '', subject: 'Build successfull', to: 'smahesh2305@gmail.com'
+    }
  post { 
         // changed { 
         //  myUtils.SendEmail('hossamyahia1017@gmail.com,hossamyahia107@mail.com')
