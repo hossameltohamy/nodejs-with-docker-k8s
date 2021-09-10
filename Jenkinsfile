@@ -84,6 +84,7 @@ def myUtils = new io.abc.pipeline()
 node {
     myUtils.Initialize_Workspace('Clean Work Space')
     myUtils.CheckOutScm('fetch repositry','https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
+    myUtils.CleanDocker('Clean Docker')
     stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
        sh 'docker run --name some-postgres -e POSTGRES_PASSWORD=hossam@107@test -d -p 5432:5432 postgres'
