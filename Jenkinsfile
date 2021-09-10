@@ -86,9 +86,10 @@ node {
     myUtils.CheckOutScm('fetch repositry','https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
     stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
+       sh 'docker run --name some-postgres -e POSTGRES_PASSWORD=hossam@107@test -d -p 5432:5432 postgres'
        sh 'npm install --only=dev'
        sh 'npm install lodash --save'
-       sh 'npm test'
+       sh 'NODE_ENV=test PGHOST=localhost PGUSER=postgres PGPASSWORD=hossam@107@test  PGDATABASE=test-db  npm run test'
      }
    }
     myUtils.DockerBuild('build DockerImage', 'hossamyahia107/nodejs-api:latest')
