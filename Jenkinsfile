@@ -98,9 +98,18 @@ node {
     myUtils.KubernetesDeployment('deploytoK8sCluster','do-ams3-test','https://8a604b66-43ff-4f24-926c-29b158894e10.k8s.ondigitalocean.com','mykubeconfig' , 'kubectl apply -f k8s//')
 
  post { 
-        changed { 
-         myUtils.SendEmail('hossamyahia1017@gmail.com,hossamyahia107@mail.com')
+        // changed { 
+        //  myUtils.SendEmail('hossamyahia1017@gmail.com,hossamyahia107@mail.com')
+        // }
+         always {
+            echo 'I will always say Hello again!'
+            
+            emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+                recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+            
         }
+    }
     }
 }
  
