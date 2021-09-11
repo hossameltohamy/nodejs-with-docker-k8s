@@ -3,7 +3,7 @@ def myUtils = new io.abc.pipelinedeclrative()
 pipeline {
    agent any
    stages {
-     stage('clone  repositry'){
+     stage('Clone  Repositry'){
         steps{
           script {
           myUtils.CheckOutScm('https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
@@ -14,7 +14,10 @@ pipeline {
    }
          post {  
          always {  
-             echo 'This will always run'  
+             echo 'Job Finished Successfully, Cleaning ........'  
+             deleteDir()
+             myUtils.CleanDocker()
+
          }  
          success {  
              echo 'This will run only if successful'  
