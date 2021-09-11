@@ -2,13 +2,20 @@
 def myUtils = new io.abc.pipelinedeclrative()
 pipeline {
    agent any
+     environment { 
+        registry = "hossamyahia107/nodejs-api" 
+        registryCredential = 'dockerhub_id' 
+        dockerImage = ''  
+    }
      tools {nodejs "nodejs"}
-
    stages {
-     stage('Clone  Repositry'){
+     stage('Checkout Source'){
         steps{
           script {
-          myUtils.CheckOutScm('https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
+          // myUtils.CheckOutScm('https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
+          //  git 'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git'
+           git url:'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git', branch:'master'
+
           }
        }
      }
@@ -17,13 +24,37 @@ pipeline {
        sh 'docker run --name some-postgres -e POSTGRES_PASSWORD=hossam@107@test -d -p 5432:5432 postgres'
        sh 'npm install --only=dev'
        sh 'npm install lodash --save'
-       sh 'NODE_ENV=test PGHOST=localhost PGUSER=postgres PGPASSWORD=hossam@107@test  PGDATABASE=test-db  npm run test'
-
-        
+       sh 'NODE_ENV=test PGHOST=localhost PGUSER=postgres PGPASSWORD=hossam@107@test  PGDATABASE=test-db  npm run test' 
       }
-  
-  
    }
+   stage('Build Docker Images'){
+     steps{
+       script{
+      //  myUtils.DockerBuild('hossamyahia107/nodejs-api:latest')
+       dockerImage = docker.build registry + ":${env.BUILD_ID}" 
+       }
+     }
+   }
+
+ stage("Push image") {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                            dockerImage.push("latest")
+                            dockerImage.push("${env.BUILD_ID}")
+                    }
+                }
+            }
+        }
+            stage('Cleaning up') { 
+
+            steps { 
+
+                sh "docker rmi $registry:${env.BUILD_ID}" 
+
+            }
+
+        } 
 
     
    }
