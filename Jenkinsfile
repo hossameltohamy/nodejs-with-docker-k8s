@@ -16,8 +16,9 @@ pipeline {
          always {  
              echo 'Job Finished Successfully, Cleaning ........'  
              deleteDir()
+             script {
              myUtils.CleanDocker()
-
+             }
          }  
          success {  
              echo 'This will run only if successful'  
