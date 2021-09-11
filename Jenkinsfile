@@ -2,6 +2,8 @@
 def myUtils = new io.abc.pipelinedeclrative()
 pipeline {
    agent any
+     tools {nodejs "nodejs"}
+
    stages {
      stage('Clone  Repositry'){
         steps{
@@ -10,6 +12,19 @@ pipeline {
           }
        }
      }
+    stage('Test App') {
+      steps{
+       sh 'docker run --name some-postgres -e POSTGRES_PASSWORD=hossam@107@test -d -p 5432:5432 postgres'
+       sh 'npm install --only=dev'
+       sh 'npm install lodash --save'
+       sh 'NODE_ENV=test PGHOST=localhost PGUSER=postgres PGPASSWORD=hossam@107@test  PGDATABASE=test-db  npm run test'
+
+        
+      }
+  
+  
+   }
+
     
    }
          post {  
