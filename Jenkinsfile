@@ -84,14 +84,7 @@ def myUtils = new io.abc.pipelinedeclrative()
 pipeline {
    agent any
    stages {
-     stage('clone  repositry'){
-        steps{
-          script {
-          myUtils.CheckOutScm('https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
-          }
-       }
-     }
-    
+      myUtils.CheckOutScm('Clone Repositry','https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
    }
          post {  
          always {  
