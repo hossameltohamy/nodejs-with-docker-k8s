@@ -59,7 +59,8 @@ pipeline {
                     sh """ sed -i 's/#BUILD_NUMBER/${env.BUILD_ID}/g' k8s/server-deployment.yaml """
                     sh """  kubectl apply -f k8s//  """
                     sh """  kubectl get pods """
-                    
+                    sh """  cat k8s/server-deployment.yaml """
+
 
                   }
                 }
