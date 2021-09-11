@@ -80,13 +80,13 @@
   // }
 
 @Library('jenkins-shared-libraries')_
-def myUtils = new io.abc.pipeline()
+def myUtils = new io.abc.pipelinedeclrative()
 pipeline {
    agent any
    stages {
-     stage('clean directory'){
+     stage('clone  repositry'){
         steps{
-          sh "exit 42"
+          myUtils.CheckOutScm('Clone repositry','https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
        }
      }
     
