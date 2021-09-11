@@ -84,9 +84,12 @@ def myUtils = new io.abc.pipeline()
 pipeline {
    agent any
    stages {
-     steps{
+     stage('clean directory'){
+        steps{
      myUtils.Initialize_Workspace()
      }
+     }
+    
    }
          post {  
          always {  
