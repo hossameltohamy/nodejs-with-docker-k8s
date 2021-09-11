@@ -86,7 +86,7 @@ pipeline {
    stages {
      stage('clone  repositry'){
         steps{
-          myUtils.CheckOutScm('Clone repositry','https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
+          myUtils.CheckOutScm('https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
        }
      }
     
