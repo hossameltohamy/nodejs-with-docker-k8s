@@ -123,4 +123,4 @@
 //          }    
 // }
 // }
- 
+ sh "sed -i 's/#BUILD_NUMBER/${BUILD_NUMBER}/g' kubedeploy.yaml"

@@ -47,17 +47,27 @@ pipeline {
             }
         }
             stage('Cleaning up') { 
-
             steps { 
-
                 sh "docker rmi $registry:${env.BUILD_ID}" 
-
             }
-
         } 
+            // myUtils.KubernetesDeployment('deploytoK8sCluster','do-ams3-test','https://8a604b66-43ff-4f24-926c-29b158894e10.k8s.ondigitalocean.com','mykubeconfig' , 'kubectl apply -f k8s//')
+            stage ('Deploy to k8s'){
+              steps{
+                script{
+                      withKubeConfig(caCertificate: '', clusterName: "do-ams3-test", contextName: '', credentialsId: "mykubeconfig", namespace: '', serverUrl: "https://8a604b66-43ff-4f24-926c-29b158894e10.k8s.ondigitalocean.com") {
+                    sh """ sed -i 's/#BUILD_NUMBER/${env.BUILD_ID}/g' k8s/server-deployment.yaml """
+                    sh """  kubectl apply -f k8s//  """
 
-    
+                    
+                  }
+                }
+              }
+            
+           
+            }
    }
+
          post {  
          always {  
              echo 'Job Finished Successfully, Cleaning ........'  

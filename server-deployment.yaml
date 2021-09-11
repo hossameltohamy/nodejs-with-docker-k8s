@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: hossamyahia107/nodejs-api:latest
+          image: hossamyahia107/nodejs-api:#BUILD_NUMBER
           ports:
             - containerPort: 3000
           env:
