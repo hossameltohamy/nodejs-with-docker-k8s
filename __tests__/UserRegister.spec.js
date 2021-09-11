@@ -25,7 +25,7 @@ describe('User Registeration', () => {
   };
   it('returns 200 ok  when singup  request is valid', async () => {
     const response = await PostUser();
-    expect(response.status).toBe(2000);
+    expect(response.status).toBe(200);
   });
   // it('Return Success Message When SignUp Request Is Valid', async () => {
   //   let response = await PostUser();
