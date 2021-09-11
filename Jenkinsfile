@@ -86,8 +86,8 @@ pipeline {
    stages {
      stage('clean directory'){
         steps{
-     myUtils.Initialize_Workspace()
-     }
+          echo "hell success"
+       }
      }
     
    }
