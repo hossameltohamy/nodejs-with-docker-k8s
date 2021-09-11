@@ -100,9 +100,9 @@ pipeline {
          success {  
              echo 'This will run only if successful'  
          }  
-         failure {  
-             sh "failuer happen"  
-         }  
+        //  failure {  
+        //      sh "failuer happen"  
+        //  }  
          unstable {  
              echo 'This will run only if the run was marked as unstable'  
          }  
