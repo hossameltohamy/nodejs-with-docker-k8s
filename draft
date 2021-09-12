@@ -160,3 +160,13 @@
      sh "git rev-parse --short HEAD > .git/commit-id"                        
      commit_id = readFile('.git/commit-id').trim()
    }
+       //  stage('Checkout Source'){
+    //     steps{
+    //       script {
+    //       // myUtils.CheckOutScm('https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
+    //       //  git 'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git'
+    //        git url:'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git', branch:'master'
+
+    //       }
+    //    }
+    //  }

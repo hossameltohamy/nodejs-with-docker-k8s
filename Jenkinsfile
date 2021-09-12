@@ -9,16 +9,6 @@ pipeline {
     }
      tools {nodejs "nodejs"}
    stages {
-    //  stage('Checkout Source'){
-    //     steps{
-    //       script {
-    //       // myUtils.CheckOutScm('https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
-    //       //  git 'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git'
-    //        git url:'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git', branch:'master'
-
-    //       }
-    //    }
-    //  }
     stage('Test App') {
       steps{
        sh 'docker run --name some-postgres -e POSTGRES_PASSWORD=hossam@107@test -d -p 5432:5432 postgres'
@@ -30,7 +20,6 @@ pipeline {
    stage('Build Docker Images'){
      steps{
        script{
-      //  myUtils.DockerBuild('hossamyahia107/nodejs-api:latest')
        dockerImage = docker.build registry + ":${env.BUILD_ID}" 
        }
      }
@@ -51,7 +40,6 @@ pipeline {
                 sh "docker rmi $registry:${env.BUILD_ID}" 
             }
         } 
-            // myUtils.KubernetesDeployment('deploytoK8sCluster','do-ams3-test','https://8a604b66-43ff-4f24-926c-29b158894e10.k8s.ondigitalocean.com','mykubeconfig' , 'kubectl apply -f k8s//')
             stage ('Deploy to k8s'){
               steps{
                 script{
@@ -61,12 +49,8 @@ pipeline {
                   }
                 }
               }
-
-
-           
             }
    }
-
          post {  
          always {  
              echo 'Job Finished Successfully, Cleaning ........'  
@@ -76,9 +60,7 @@ pipeline {
              }
          }  
          success {  
-             echo 'This will run only if successful'  
-             mail bcc: '', body: "<b>${currentBuild.currentResult} !! </b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "hossamyahia107@gmail.com";   
-
+             mail bcc: '', body: "<b>${currentBuild.currentResult} !! </b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.currentResult} CI: Project name -> ${env.JOB_NAME}", to: "hossamyahia107@gmail.com"
          }  
         
        
