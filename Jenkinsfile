@@ -6,7 +6,7 @@ pipeline {
         registry = "hossamyahia107/nodejs-api" 
         registryCredential = 'dockerhub_id' 
         dockerImage = ''  
-        SonarQubescannerHome = tool 'SonarQube'
+        SonarQubescannerHome = tool 'SonarQube Scanner 2.8'
         server= 'http://137.184.100.206:9000'
         PROJECT_KEY='nodejs'
         CODE_DIR= "${JENKINS_HOME}/workspace/${env.JOB_NAME}"
