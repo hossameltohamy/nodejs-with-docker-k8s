@@ -9,6 +9,20 @@ pipeline {
     }
      tools {nodejs "nodejs"}
    stages {
+     
+      stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh "./gradlew sonarqube"
+                }
+            }
+        }
+        stage("Quality gate") {
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+        }
+    } 
     stage('Test App') {
       steps{
        sh 'docker run --name some-postgres -e POSTGRES_PASSWORD=hossam@107@test -d -p 5432:5432 postgres'
@@ -60,7 +74,7 @@ pipeline {
              }
          }  
          success {  
-             mail bcc: '', body: "<b>${currentBuild.currentResult} !! </b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.currentResult} CI: Project name -> ${env.JOB_NAME}", to: "hossamyahia107@gmail.com"
+             mail bcc: '', body: "<b>${currentBuild.currentResult} !! </b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.currentResult} CI: Project name -> ${env.JOB_NAME}", to: "hossamyahia107@gmail.com";   
          }  
         
        
