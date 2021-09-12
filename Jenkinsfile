@@ -9,7 +9,7 @@ pipeline {
     }
      tools {nodejs "nodejs"}
    stages {
-     
+
       stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
@@ -22,7 +22,7 @@ pipeline {
                 waitForQualityGate abortPipeline: true
             }
         }
-    } 
+    
     stage('Test App') {
       steps{
        sh 'docker run --name some-postgres -e POSTGRES_PASSWORD=hossam@107@test -d -p 5432:5432 postgres'
