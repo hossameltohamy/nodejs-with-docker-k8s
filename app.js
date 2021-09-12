@@ -37,9 +37,9 @@ require('./setups/swagger')(app);
  **/
 require('./routes')(app);
 
-app.get('/api/home', function(req,res){
-  res.send({hossam:"hossam"})
-})
+app.get('/api/home', function (req, res) {
+  res.send({ hossam: 'welcome hossam' });
+});
 
 /**
  * Cron Job Setup every monday at 7 clock
