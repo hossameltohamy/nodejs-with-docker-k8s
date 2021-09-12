@@ -37,6 +37,8 @@ pipeline {
        sh 'npm install --only=dev'
        sh 'npm install lodash --save'
        sh 'NODE_ENV=test PGHOST=localhost PGUSER=postgres PGPASSWORD=hossam@107@test  PGDATABASE=test-db  npm run test' 
+        // sh 'docker rm -f some-postgres ' 
+
       }
    }
    stage('Build Docker Images'){
@@ -78,7 +80,7 @@ pipeline {
              echo 'Job Finished Successfully, Cleaning ........'  
              deleteDir()
              script {
-             myUtils.CleanDocker()
+             // myUtils.CleanDocker()
              }
          }  
          success {  
