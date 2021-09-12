@@ -79,9 +79,6 @@ pipeline {
          always {  
              echo 'Job Finished Successfully, Cleaning ........'  
              deleteDir()
-             script {
-             // myUtils.CleanDocker()
-             }
          }  
          success {  
              mail bcc: '', body: "<b>${currentBuild.currentResult} !! </b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.currentResult} CI: Project name -> ${env.JOB_NAME}", to: "hossamyahia107@gmail.com";   
