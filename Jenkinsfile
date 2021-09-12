@@ -6,7 +6,7 @@ pipeline {
         registry = "hossamyahia107/nodejs-api" 
         registryCredential = 'dockerhub_id' 
         dockerImage = ''  
-        SonarQubescannerHome = tool 'SonarQube Scanner 2.8'
+        SonarQubescannerHome = tool 'SonarQube Scanner 4.1.0.1829'
         server= 'http://137.184.100.206:9000'
         PROJECT_KEY='nodejs'
         CODE_DIR= "${JENKINS_HOME}/workspace/${env.JOB_NAME}"
@@ -18,7 +18,7 @@ pipeline {
 
       stage('SonarQube analysis') {
             steps {
-                withSonarQubeEnv('SonarQube Scanner 2.8') {
+                withSonarQubeEnv('SonarQube Scanner 4.1.0.1829') {
                 echo  "${PROJECT_KEY}"
           	    sh "cd ${CODE_DIR} && ${SonarQubescannerHome}/bin/sonar-scanner -Dsonar.host.url=${SERVER} -Dsonar.projectKey=${env.JOB_NAME} -Dsonar.java.binaries=${SonarQubescannerHome}/bin/  -Dsonar.login=a85ffda962dfd2408cb0985fda93cbbc2a3933eb  -Dsonar.projectName=${PROJECT_KEY} -Dsonar.sourceEncoding=UTF-8 -Dsonar.webhooks.global.1.url=${SERVER}  -Dsonar.sources=. -Dsonar.projectVersion=1.0"
                 sleep 10
