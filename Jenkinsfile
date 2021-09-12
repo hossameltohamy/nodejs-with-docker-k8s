@@ -55,7 +55,7 @@ pipeline {
             stage ('Deploy to k8s'){
               steps{
                 script{
-                      withKubeConfig(caCertificate: '', clusterName: "do-ams3-test", contextName: '', credentialsId: "mykubeconfig", namespace: '', serverUrl: "https://8a604b66-43ff-4f24-926c-29b158894e10.k8s.ondigitalocean.com") {
+                      withKubeConfig(caCertificate: '', clusterName: "do-ams3-test", contextName: '', credentialsId: "mykubeconfig", namespace: '', serverUrl: "https://753b7942-906c-4ebf-b3bd-04a85ae5ef94.k8s.ondigitalocean.com") {
                     sh """ sed -i 's/#BUILD_NUMBER/${env.BUILD_ID}/g' k8s/server-deployment.yaml """
                     sh """  kubectl apply -f k8s//  """
                     sh """  kubectl get pods """
