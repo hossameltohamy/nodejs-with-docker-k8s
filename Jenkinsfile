@@ -6,14 +6,22 @@ pipeline {
         registry = "hossamyahia107/nodejs-api" 
         registryCredential = 'dockerhub_id' 
         dockerImage = ''  
+        SonarQubescannerHome = tool 'SonarQube'
+        server= 'http://137.184.100.206:9000'
+        PROJECT_KEY='nodejs'
+        CODE_DIR= "${JENKINS_HOME}/workspace/${env.JOB_NAME}"
+         
     }
      tools {nodejs "nodejs"}
+    //  tool 'sonarqube-scanner'
    stages {
 
       stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "./gradlew sonarqube"
+                echo  "${PROJECT_KEY}"
+          	    sh "cd ${CODE_DIR} && ${SonarQubescannerHome}/bin/sonar-scanner -Dsonar.host.url=${SERVER} -Dsonar.projectKey=${env.JOB_NAME} -Dsonar.java.binaries=${SonarQubescannerHome}/bin/  -Dsonar.login=a85ffda962dfd2408cb0985fda93cbbc2a3933eb  -Dsonar.projectName=${PROJECT_KEY} -Dsonar.sourceEncoding=UTF-8 -Dsonar.webhooks.global.1.url=${SERVER}  -Dsonar.sources=. -Dsonar.projectVersion=1.0"
+                sleep 10
                 }
             }
         }
