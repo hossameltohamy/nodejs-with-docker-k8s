@@ -18,7 +18,7 @@ pipeline {
 
       stage('SonarQube analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
+                withSonarQubeEnv('SonarQube Scanner 2.8') {
                 echo  "${PROJECT_KEY}"
           	    sh "cd ${CODE_DIR} && ${SonarQubescannerHome}/bin/sonar-scanner -Dsonar.host.url=${SERVER} -Dsonar.projectKey=${env.JOB_NAME} -Dsonar.java.binaries=${SonarQubescannerHome}/bin/  -Dsonar.login=a85ffda962dfd2408cb0985fda93cbbc2a3933eb  -Dsonar.projectName=${PROJECT_KEY} -Dsonar.sourceEncoding=UTF-8 -Dsonar.webhooks.global.1.url=${SERVER}  -Dsonar.sources=. -Dsonar.projectVersion=1.0"
                 sleep 10
