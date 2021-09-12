@@ -9,16 +9,16 @@ pipeline {
     }
      tools {nodejs "nodejs"}
    stages {
-     stage('Checkout Source'){
-        steps{
-          script {
-          // myUtils.CheckOutScm('https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
-          //  git 'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git'
-           git url:'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git', branch:'master'
+    //  stage('Checkout Source'){
+    //     steps{
+    //       script {
+    //       // myUtils.CheckOutScm('https://github.com/hossameltohamy/nodejs-with-docker-k8s.git','master','')
+    //       //  git 'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git'
+    //        git url:'https://github.com/hossameltohamy/nodejs-with-docker-k8s.git', branch:'master'
 
-          }
-       }
-     }
+    //       }
+    //    }
+    //  }
     stage('Test App') {
       steps{
        sh 'docker run --name some-postgres -e POSTGRES_PASSWORD=hossam@107@test -d -p 5432:5432 postgres'
