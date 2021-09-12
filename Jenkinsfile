@@ -37,7 +37,7 @@ pipeline {
        sh 'npm install --only=dev'
        sh 'npm install lodash --save'
        sh 'NODE_ENV=test PGHOST=localhost PGUSER=postgres PGPASSWORD=hossam@107@test  PGDATABASE=test-db  npm run test' 
-        // sh 'docker rm -f some-postgres ' 
+       sh 'docker rm -f some-postgres' 
 
       }
    }
