@@ -38,7 +38,7 @@ require('./setups/swagger')(app);
 require('./routes')(app);
 
 app.get('/api/home', function (req, res) {
-  res.send({ hossam: 'welcome hossam yahia pull request test yarb  aa  ' });
+  res.send({ hossam: 'welcome hossam yahia pull request test s  ' });
 });
 
 /**
