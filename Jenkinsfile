@@ -1,5 +1,5 @@
-@Library('jenkins-shared-libraries')_
-def myUtils = new io.abc.pipelinedeclrative()
+// @Library('jenkins-shared-libraries')_
+// def myUtils = new io.abc.pipelinedeclrative()
 pipeline {
    agent any
      environment { 
